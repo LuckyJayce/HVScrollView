@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 主色调 -->
+    <color name="primary">#4CAF50</color>
+    <!-- 暗主色调 -->
+    <color name="primary_dark">#388E3C</color>
+    <!-- 亮主色调 -->
+    <color name="primary_light">#C8E6C9</color>
+    <!-- 强调色 -->
+    <color name="accent">#4CAF50</color>
+    <!-- 文本颜色 -->
+    <color name="primary_text">#212121</color>
+    <!-- 次文本颜色 -->
+    <color name="secondary_text">#727272</color>
+    <!-- 图标颜色 -->
+    <color name="icons">#FFFFFF</color>
+    <!-- 分割线颜色 -->
+    <color name="divider">#dadada</color>
+    <color name="background_light">#F5F5F5</color>
+</resources>

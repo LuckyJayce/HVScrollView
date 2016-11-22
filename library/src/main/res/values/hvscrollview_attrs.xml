@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="HVScrollView">
+        <!--<attr name="fillViewportH" format="string" />-->
+        <!--<attr name="android:orientation" />-->
+        <!--<attr name="spanCount" format="integer" />-->
+        <attr name="fillViewportH" format="boolean" />
+        <attr name="fillViewportV" format="boolean" />
+        <attr name="canScrollH" format="boolean" />
+        <attr name="canScrollV" format="boolean" />
+        <attr name="childLayoutCenter" format="boolean" />
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">HVScrollView</string>
+    <string name="title_activity_more_layer_scroll_view">MoreLayerScrollViewActivity</string>
+    <string name="title_activity_guide">GuideActivity</string>
+</resources>

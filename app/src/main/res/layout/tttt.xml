@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:descendantFocusability="blocksDescendants"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:descendantFocusability="blocksDescendants"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#282"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ToggleButton" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+        </LinearLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/main_hvScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="#000"
+            android:fadingEdge="horizontal|vertical"
+            android:padding="8dp"
+            android:scrollbars="horizontal|vertical">
+
+            <TextView
+                android:layout_width="1000dp"
+                android:layout_height="wrap_content"
+                android:background="#888"
+                android:padding="8dp"
+                android:text="Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello WoldHello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold\n\nHello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello WoldHello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold"
+                android:textColor="#fff"
+                android:textSize="32sp" />
+
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

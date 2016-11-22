@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:background="#888"
+    android:padding="8dp">
+
+    <EditText
+        android:id="@+id/item_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_normal"
+        android:maxLines="1"
+        android:text="00:Hello World"
+        android:textColor="#fff"
+        android:textSize="36sp" />
+</LinearLayout>

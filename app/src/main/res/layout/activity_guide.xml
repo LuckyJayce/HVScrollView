@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.shizhefei.view.hvscrollview.HVScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/guide_hvScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#000"
+        android:fadingEdge="horizontal|vertical"
+        android:padding="8dp"
+        android:scrollbars="horizontal|vertical"
+        app:canScrollH="true"
+        app:canScrollV="true"
+        app:childLayoutCenter="false"
+        app:fillViewportH="false"
+        app:fillViewportV="false">
+        <!--canScrollV 是否可以水平滚动,默认true 可以滚动-->
+        <!--canScrollV 是否可以垂直滚动,默认true 可以滚动-->
+        <!--childLayoutCenter 内容是否居中显示，默认false右上角对齐-->
+        <!--fillViewportV  垂直内容宽度是否充满，默认false自适应-->
+        <!--fillViewportV  水平内容高度是否充满，默认false自适应-->
+
+        <LinearLayout
+            android:id="@+id/guide_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#666"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="可以通过编辑输入框的文本，让布局变宽\n点击添加按钮让布局变长\n就会出现水平和垂直的滚动条"
+                android:textColor="#fff" />
+
+            <include layout="@layout/item" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <Button
+                    android:id="@+id/guide_deleteButton"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:text="删除" />
+
+                <Button
+                    android:id="@+id/guide_addButton"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:text="添加" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </com.shizhefei.view.hvscrollview.HVScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#666">
+
+        <ToggleButton
+            android:id="@+id/guide_childLayoutCanter_toggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOff="内容居左上角"
+            android:textOn="内容居中" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#666">
+
+        <ToggleButton
+            android:id="@+id/guide_canScrollH_toggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOff="可以水平滚动"
+            android:textOn="禁止水平滚动" />
+
+        <ToggleButton
+            android:id="@+id/guide_canScrollV_toggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOff="可以竖直滚动"
+            android:textOn="禁止竖直滚动" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#666">
+
+        <ToggleButton
+            android:id="@+id/guide_fillViewportH_toggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOff="水平宽度内容自适应"
+            android:textOn="水平宽度内容充满" />
+
+        <ToggleButton
+            android:id="@+id/guide_fillViewportV_toggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOff="垂直宽度内容自适应"
+            android:textOn="垂直宽度内容充满" />
+    </LinearLayout>
+
+</LinearLayout>

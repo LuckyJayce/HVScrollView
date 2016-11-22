@@ -1,0 +1,18 @@
+<resources>
+
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColorPrimary">@color/icons</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="colorControlNormal">@color/icons</item>
+        <item name="icon">@color/icons</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="actionBarSize">48dp</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <!-- <item name="colorControlActivated">@color/primary_light</item> -->
+        <item name="android:windowBackground">@color/icons</item>
+        <!-- 按钮按下的颜色 -->
+
+        <!-- <item name="colorControlHighlight">@color/primary_light</item> -->
+    </style>
+
+</resources>

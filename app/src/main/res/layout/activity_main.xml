@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <Button
+        android:text="ScrollView详细设置"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/main_guide_button" />
+
+    <Button
+        android:text="多层ScrollView嵌套"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/main_moreLayerScrollView_button" />
+
+</LinearLayout>
