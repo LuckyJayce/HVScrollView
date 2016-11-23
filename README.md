@@ -88,7 +88,8 @@ Indicator 取代 tabhost，实现网易顶部tab，新浪微博主页底部tab�
 License
 =======
 
-    Copyright 2016 shizhefei（LuckyJayce）
+    Copyright (C) 2016 shizhefei（LuckyJayce）
+    Copyright (C) 2015 The Android Open Source Project
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
