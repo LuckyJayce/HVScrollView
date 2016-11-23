@@ -13,14 +13,12 @@
         android:fadingEdge="horizontal|vertical"
         android:padding="8dp"
         android:scrollbars="horizontal|vertical"
-        app:canScrollH="true"
-        app:canScrollV="true"
         app:childLayoutCenter="false"
-        app:scrollOrientation="both"
         app:fillViewportH="false"
-        app:fillViewportV="false">
-        <!-- app:scrollOrientation="both" 可以滚动-->
-        <!--canScrollV 是否可以垂直滚动,默认true 可以滚动-->
+        app:fillViewportV="false"
+        app:scrollOrientation="both">
+
+        <!-- app:scrollOrientation="both" 可以滚动的方向，默认双向滚动-->
         <!--childLayoutCenter 内容是否居中显示，默认false右上角对齐-->
         <!--fillViewportV  垂直内容宽度是否充满，默认false自适应-->
         <!--fillViewportV  水平内容高度是否充满，默认false自适应-->
@@ -107,10 +105,10 @@
     </LinearLayout>
 
     <LinearLayout
-        android:background="#666"
-        android:paddingBottom="8dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#666"
+        android:paddingBottom="8dp">
 
         <TextView
             android:layout_width="wrap_content"
