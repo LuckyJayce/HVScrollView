@@ -94,7 +94,7 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
     /**
      * Interface definition for a callback to be invoked when the scroll
      * X or Y positions of a view change.
-     * 
+     *
      * This version of the interface works on all versions of Android, back to API v4.
      *
      * @see #setOnScrollChangeListener(OnScrollChangeListener)
@@ -1194,12 +1194,12 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
                 (overScrollMode == ViewCompat.OVER_SCROLL_IF_CONTENT_SCROLLS && canScrollVertical);
 
         int newScrollX = scrollX;
-        if (overScrollHorizontal) {
+        if (canScrollHorizontally()) {
             newScrollX += deltaX;
         }
 
         int newScrollY = scrollY;
-        if (overScrollVertical) {
+        if (canScrollVertically()) {
             newScrollY += deltaY;
         }
 
@@ -1227,7 +1227,7 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
             clampedY = true;
         }
 
-        if (clampedY || clampedX) {
+        if (clampedY && clampedX) {
             mScroller.springBack(newScrollX, newScrollY, 0, getScrollRangeX(), 0, getScrollRangeY());
         }
 
@@ -1255,9 +1255,9 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
     }
 
     /**
-     * 
+     *
      * Finds the next focusable component that fits in the specified bounds.
-     * 
+     *
      *
      * @param topFocus look for a candidate is the one at the top of the bounds
      *                 if topFocus is true, or at the bottom of the bounds if topFocus is
@@ -1859,7 +1859,7 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
     }
 
     /**
-     * 
+     *
      */
     @Override
     public int computeVerticalScrollOffset() {
@@ -1867,7 +1867,7 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
     }
 
     /**
-     * 
+     *
      */
     @Override
     public int computeVerticalScrollExtent() {
@@ -1875,7 +1875,7 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
     }
 
     /**
-     * 
+     *
      */
     @Override
     public int computeHorizontalScrollRange() {
@@ -1900,7 +1900,7 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
     }
 
     /**
-     * 
+     *
      */
     @Override
     public int computeHorizontalScrollOffset() {
@@ -1908,7 +1908,7 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
     }
 
     /**
-     * 
+     *
      */
     @Override
     public int computeHorizontalScrollExtent() {
@@ -2113,14 +2113,14 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
                 }
             }
 
-            final boolean fullyConsumedVertical = canScrollVertically()
-                    && x == getScrollX();
-            final boolean fullyConsumedHorizontal = canScrollHorizontally()
-                    && x == getScrollY();
-            final boolean fullyConsumedAny = fullyConsumedHorizontal
-                    || fullyConsumedVertical;
+//            final boolean fullyConsumedVertical = canScrollVertically()
+//                    && x == getScrollX();
+//            final boolean fullyConsumedHorizontal = canScrollHorizontally()
+//                    && x == getScrollY();
+//            final boolean fullyConsumedAny = fullyConsumedHorizontal
+//                    || fullyConsumedVertical;
 
-            if (mScroller.isFinished() || !fullyConsumedAny) {
+            if (mScroller.isFinished()) {
                 setScrollState(SCROLL_STATE_IDLE); // setting state to idle will stop this.
             } else {
                 ViewCompat.postInvalidateOnAnimation(this);
@@ -2293,7 +2293,7 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
     /**
      * When looking for focus in children of a scroll view, need to be a little
      * more careful not to give focus to something that is scrolled off screen.
-     * 
+     *
      * This is more expensive than the default {@link ViewGroup}
      * implementation, otherwise this behavior might have been made the default.
      */
@@ -2445,7 +2445,7 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * This version also clamps the scrolling to the bounds of our child.
      */
     @Override
