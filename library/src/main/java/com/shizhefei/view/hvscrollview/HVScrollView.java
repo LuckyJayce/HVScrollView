@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -325,16 +326,19 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
 
     public void setCanScrollHorizontally(boolean canScrollH) {
         this.mCanScrollH = canScrollH;
+        requestLayout();
     }
 
     public void setCanScrollVertically(boolean canScrollV) {
         this.mCanScrollV = canScrollV;
+        requestLayout();
     }
 
 
     public void setCanScroll(boolean canScrollH, boolean canScrollV) {
         this.mCanScrollV = canScrollV;
         this.mCanScrollH = canScrollH;
+        requestLayout();
     }
 
     public boolean canScrollVertically() {
@@ -1928,10 +1932,10 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
         int childTop = getPaddingTop() + lp.topMargin;
         if (mChildLayoutCenter) {
             if (getMeasuredWidth() > child.getMeasuredWidth()) {
-                childLeft += (getMeasuredWidth() - child.getMeasuredWidth()) / 2;
+                childLeft = (getMeasuredWidth() - child.getMeasuredWidth()) / 2;
             }
             if (getMeasuredHeight() > child.getMeasuredHeight()) {
-                childTop += (getMeasuredHeight() - child.getMeasuredHeight()) / 2;
+                childTop = (getMeasuredHeight() - child.getMeasuredHeight()) / 2;
             }
         }
         int measureHeight = child.getMeasuredHeight();
@@ -2007,8 +2011,8 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
         if (getChildCount() == 0) {
             return;
         }
-        final View child = getChildAt(0);
-        final MarginLayoutParams lp = (MarginLayoutParams) child.getLayoutParams();
+        View child = getChildAt(0);
+        MarginLayoutParams lp = (MarginLayoutParams) child.getLayoutParams();
 
         int widthPadding = lp.leftMargin + lp.rightMargin + getPaddingLeft() + getPaddingRight();
         int heightPadding = lp.topMargin + lp.bottomMargin + getPaddingTop() + getPaddingBottom();
@@ -2018,45 +2022,58 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
         maxWidth = Math.max(maxWidth, getSuggestedMinimumWidth());
 
         int childState = 0;
+        int childWidthMeasureSpec;
+        int childHeightMeasureSpec;
+
+        if (canScrollVertically()) {
+            childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(
+                    MeasureSpec.getSize(heightMeasureSpec), MeasureSpec.UNSPECIFIED);
+        } else {
+            childHeightMeasureSpec = getChildMeasureSpec(heightMeasureSpec,
+                    getPaddingBottom() + getPaddingTop() + lp.topMargin + lp.bottomMargin, lp.height);
+        }
+        if (canScrollHorizontally()) {
+            childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(
+                    MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.UNSPECIFIED);
+        } else {
+            childWidthMeasureSpec = getChildMeasureSpec(widthMeasureSpec,
+                    getPaddingLeft() + getPaddingRight() + lp.leftMargin + lp.rightMargin, lp.width);
+        }
+        child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            childState = combineMeasuredStates(childState, child.getMeasuredState());
+        }
+        maxWidth = Math.max(maxWidth, child.getMeasuredWidth() + lp.leftMargin + lp.rightMargin);
+        maxHeight = Math.max(maxHeight, child.getMeasuredHeight() + lp.topMargin + lp.bottomMargin);
+
+        maxHeight = Math.max(maxHeight, getSuggestedMinimumHeight());
+        maxWidth = Math.max(maxWidth, getSuggestedMinimumWidth());
+
         int measuredWidth = ViewCompat.resolveSizeAndState(maxWidth, widthMeasureSpec, childState);
         int measuredHeight = ViewCompat.resolveSizeAndState(maxHeight, heightMeasureSpec, childState << MEASURED_HEIGHT_STATE_SHIFT);
         setMeasuredDimension(measuredWidth, measuredHeight);
 
-        int childWidthMeasureSpec;
-        if (lp.width == LayoutParams.MATCH_PARENT) {
-            final int width = Math.max(0, getMeasuredWidth() - getPaddingLeft() - getPaddingRight() - lp.leftMargin - lp.rightMargin);
-            childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY);
-        } else if (lp.width == LayoutParams.WRAP_CONTENT) {
-            childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(measuredWidth, MeasureSpec.UNSPECIFIED);
-        } else {
-            childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(lp.width, MeasureSpec.EXACTLY);
-        }
-
-        int childHeightMeasureSpec;
-        if (lp.height == LayoutParams.MATCH_PARENT) {
-            final int height = Math.max(0, getMeasuredHeight() - getPaddingTop() - getPaddingBottom() - lp.topMargin - lp.bottomMargin);
-            childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
-        } else if (lp.height == LayoutParams.WRAP_CONTENT) {
-            childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(measuredHeight, MeasureSpec.UNSPECIFIED);
-        } else {
-            childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(lp.height, MeasureSpec.EXACTLY);
-        }
-
-        child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
 
         boolean needMeasure = false;
         final int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         if (heightMode != MeasureSpec.UNSPECIFIED && mFillViewportV) {
             if (child.getMeasuredHeight() < measuredHeight - heightPadding) {
-                childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(measuredHeight - heightPadding, MeasureSpec.EXACTLY);
-                needMeasure = true;
+                int newChildHeightMeasureSpec = MeasureSpec.makeMeasureSpec(measuredHeight - heightPadding, MeasureSpec.EXACTLY);
+                if (newChildHeightMeasureSpec != childHeightMeasureSpec) {
+                    childHeightMeasureSpec = newChildHeightMeasureSpec;
+                    needMeasure = true;
+                }
             }
         }
         final int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         if (widthMode != MeasureSpec.UNSPECIFIED && mFillViewportH) {
             if (child.getMeasuredWidth() < measuredWidth - widthPadding) {
-                childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(measuredWidth - widthPadding, MeasureSpec.EXACTLY);
-                needMeasure = true;
+                int newChildWidthMeasureSpec = MeasureSpec.makeMeasureSpec(measuredWidth - widthPadding, MeasureSpec.EXACTLY);
+                if (newChildWidthMeasureSpec != childWidthMeasureSpec) {
+                    childWidthMeasureSpec = newChildWidthMeasureSpec;
+                    needMeasure = true;
+                }
             }
         }
         if (needMeasure) {

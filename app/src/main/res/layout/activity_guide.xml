@@ -10,9 +10,9 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="#000"
-        android:fadingEdge="horizontal|vertical"
         android:padding="8dp"
         android:scrollbars="horizontal|vertical"
+        android:fadingEdge="horizontal|vertical"
         app:canScrollH="true"
         app:canScrollV="true"
         app:childLayoutCenter="false"
@@ -23,6 +23,9 @@
         <!--childLayoutCenter 内容是否居中显示，默认false右上角对齐-->
         <!--fillViewportV  垂直内容宽度是否充满，默认false自适应-->
         <!--fillViewportV  水平内容高度是否充满，默认false自适应-->
+
+        <!--android:scrollbars="horizontal|vertical" 显示滚动条-->
+        <!--android:fadingEdge="horizontal|vertical" 显示滚动条-->
 
         <LinearLayout
             android:id="@+id/guide_layout"
@@ -88,6 +91,25 @@
         android:background="#666">
 
         <ToggleButton
+            android:id="@+id/guide_fillViewportH_toggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOff="水平宽度内容自适应"
+            android:textOn="水平宽度内容充满" />
+
+        <ToggleButton
+            android:id="@+id/guide_fillViewportV_toggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOff="垂直宽度内容自适应"
+            android:textOn="垂直宽度内容充满" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#666">
+
+        <ToggleButton
             android:id="@+id/guide_canScrollH_toggleButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -104,24 +126,5 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#666">
-
-        <ToggleButton
-            android:id="@+id/guide_fillViewportH_toggleButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textOff="水平宽度内容自适应"
-            android:textOn="水平宽度内容充满" />
-
-        <ToggleButton
-            android:id="@+id/guide_fillViewportV_toggleButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textOff="垂直宽度内容自适应"
-            android:textOn="垂直宽度内容充满" />
-    </LinearLayout>
 
 </LinearLayout>

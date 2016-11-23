@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#222"
+    android:orientation="vertical">
+
+    <com.shizhefei.view.hvscrollview.HVScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#666"
+        android:padding="8dp"
+        app:canScrollV="false">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#888"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HVScrollView\n在ViewPager下滑动\n滑动到末尾可以切换下一个页面ViewPager"
+                android:textColor="#fff" />
+
+            <TextView
+                android:layout_width="1000dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/test_texts"
+                android:textColor="#fff"
+                android:textSize="26sp" />
+
+        </LinearLayout>
+    </com.shizhefei.view.hvscrollview.HVScrollView>
+
+    <!--添加   app:canScrollH="false" ，相当于垂直ScrollView -->
+    <com.shizhefei.view.hvscrollview.HVScrollView
+        android:id="@+id/HVScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:background="#666"
+        app:canScrollH="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="#282"
+                android:gravity="center"
+                android:text="外层的垂直HVScrollView"
+                android:textColor="#fff"
+                android:textSize="16sp" />
+
+            <!--添加   app:canScrollH="false" ，相当于垂直ScrollView -->
+            <com.shizhefei.view.hvscrollview.HVScrollView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="#666"
+                android:padding="8dp"
+                app:canScrollH="false">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#888"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="被嵌套的垂直HVScrollView 可以滑动"
+                        android:textColor="#fff" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:paddingBottom="80dp"
+                        android:text="@string/test_texts"
+                        android:textColor="#fff"
+                        android:textSize="26sp" />
+
+                </LinearLayout>
+
+            </com.shizhefei.view.hvscrollview.HVScrollView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="#282"
+                android:gravity="center"
+                android:text="外层的ScrollView"
+                android:textColor="#fff"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+    </com.shizhefei.view.hvscrollview.HVScrollView>
+
+</LinearLayout>

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "com.shizhefei.view.hvscrollview.demo"
-        minSdkVersion 10
+        minSdkVersion 9
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -22,5 +22,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.shizhefei:ViewPagerIndicator:1.1.3'
+    compile 'com.android.support:recyclerview-v7:25.0.1'
     compile project(':library')
 }

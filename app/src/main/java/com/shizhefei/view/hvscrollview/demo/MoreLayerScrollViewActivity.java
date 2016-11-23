@@ -1,9 +1,9 @@
 package com.shizhefei.view.hvscrollview.demo;
 
 import android.os.Bundle;
-import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 
-public class MoreLayerScrollViewActivity extends Activity {
+public class MoreLayerScrollViewActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

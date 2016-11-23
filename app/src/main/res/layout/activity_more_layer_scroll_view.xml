@@ -3,6 +3,8 @@
 <com.shizhefei.view.hvscrollview.HVScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:canScrollH="false"
     android:descendantFocusability="blocksDescendants">
 
     <LinearLayout
@@ -60,17 +62,18 @@
             android:id="@+id/main_hvScrollView"
             android:layout_width="match_parent"
             android:layout_height="260dp"
+            app:canScrollH="false"
             android:background="#000"
             android:fadingEdge="horizontal|vertical"
             android:padding="8dp"
             android:scrollbars="horizontal|vertical">
 
             <TextView
-                android:layout_width="1000dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#888"
                 android:padding="8dp"
-                android:text="Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello WoldHello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold\n\nHello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello WoldHello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold,Hello Wold"
+                android:text="@string/test_texts"
                 android:textColor="#fff"
                 android:textSize="32sp" />
 

@@ -16,13 +16,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:windowSoftInputMode="adjustResize|stateHidden"
             android:name=".MoreLayerScrollViewActivity"
-            android:label="@string/title_activity_more_layer_scroll_view" />
+            android:label="@string/title_activity_more_layer_scroll_view"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:name=".GuideActivity"
-            android:label="@string/title_activity_guide"/>
+            android:label="@string/title_activity_guide"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".CompareActivity"
+            android:label="@string/title_activity_compare"></activity>
     </application>
 
 </manifest>

@@ -2,4 +2,7 @@
     <string name="app_name">HVScrollView</string>
     <string name="title_activity_more_layer_scroll_view">MoreLayerScrollViewActivity</string>
     <string name="title_activity_guide">GuideActivity</string>
+    <string name="title_activity_compare">Compare</string>
+
+    <string name="test_texts">Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,\nHello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,\nHello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,Hello World,</string>
 </resources>

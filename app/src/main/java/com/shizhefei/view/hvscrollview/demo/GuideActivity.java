@@ -1,7 +1,7 @@
 package com.shizhefei.view.hvscrollview.demo;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -11,7 +11,7 @@ import android.widget.ToggleButton;
 import com.shizhefei.view.hvscrollview.HVScrollView;
 
 
-public class GuideActivity extends AppCompatActivity {
+public class GuideActivity extends FragmentActivity {
 
     private View addButton;
     private LinearLayout layout;
