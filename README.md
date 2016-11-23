@@ -4,7 +4,7 @@ HVScrollView
 #导入方式#
   gradle导入      
 
-    compile 'com.shizhefei:HVScrollView:1.0.0'  
+    compile 'com.shizhefei:HVScrollView:1.0.1'  
     compile 'com.android.support:support-v4:23.4.0'  
 # 效果图 # 
 
