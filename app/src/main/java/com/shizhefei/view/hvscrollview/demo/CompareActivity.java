@@ -23,7 +23,7 @@ public class CompareActivity extends FragmentActivity {
         ViewPager viewPager = (ViewPager) findViewById(R.id.compare_viewPager);
 
         indicatorView.setOnTransitionListener(new OnTransitionTextListener().setColor(Color.BLACK, Color.GRAY));
-        indicatorView.setScrollBar(new ColorBar(this, Color.parseColor("#ff0000"), 4));
+        indicatorView.setScrollBar(new ColorBar(this, Color.BLUE, 8));
         IndicatorViewPager indicatorViewPager = new IndicatorViewPager(indicatorView, viewPager);
         indicatorViewPager.setAdapter(new PagerAdapters());
 
@@ -40,7 +40,9 @@ public class CompareActivity extends FragmentActivity {
 
         @Override
         public View getViewForTab(int position, View convertView, ViewGroup container) {
-            convertView = getLayoutInflater().inflate(R.layout.item_toptab, container, false);
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.item_toptab, container, false);
+            }
             TextView textView = (TextView) convertView;
             textView.setText(titles[position]);
             return convertView;

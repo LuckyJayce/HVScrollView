@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'//添加jcenter插件
 
 android {
     compileSdkVersion 25
@@ -8,7 +9,7 @@ android {
         minSdkVersion 9
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
     }
     buildTypes {
@@ -22,4 +23,14 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     provided 'com.android.support:support-v4:25.0.1'
+}
+
+//添加
+publish {
+    userOrg = 'luckyjayce'//bintray.com用户名
+    groupId = 'com.shizhefei'//jcenter上的路径
+    artifactId = 'HVScrollView'//项目名称
+    publishVersion = '1.0.0'//版本号
+    desc = 'HVScrollView is just like {@link ScrollView}, but it supports acting as both a nested scrolling parent and child on both new and old versions of Android.can scroll horizontal and vertical'//描述，不重要
+    website = 'https://github.com/LuckyJayce/HVScrollView'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
 }

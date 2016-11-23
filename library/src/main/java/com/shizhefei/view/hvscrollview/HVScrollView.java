@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright LuckyJayce 2016
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,16 +58,18 @@ import android.widget.ScrollView;
 
 import java.util.List;
 
-import static com.shizhefei.view.hvscrollview.R.attr.canScrollH;
-import static com.shizhefei.view.hvscrollview.R.attr.canScrollV;
-import static com.shizhefei.view.hvscrollview.R.attr.fillViewportH;
-import static com.shizhefei.view.hvscrollview.R.attr.fillViewportV;
-
 
 /**
- * NestedScrollView is just like {@link ScrollView}, but it supports acting
+ * 作者：LuckyJayce
+ * HVScrollView is just like {@link ScrollView}, but it supports acting
  * as both a nested scrolling parent and child on both new and old versions of Android.
- * Nested scrolling is enabled by default.
+ * can scroll horizontal and vertical
+ * 能够水平和垂直滚动的 ScrollView，
+ * 默认同时可以水平和垂直滚动
+ * 当canScrollH 设置为false的时候就是一个垂直的的ScrollView
+ * 当canScrollV 设置为false的时候就是一个水平的的ScrollView
+ * 代码修改于v4的25.0.0版本的NestedScrollView，参考了RecyclerView的双向滚动的事件，参考了FrameLayoutd的onMeasure和ScrollView的HorizontalScrollView的onMeasure
+ * 支持滑动末尾，ViewPager的页面切换
  */
 public class HVScrollView extends ViewGroup implements NestedScrollingParent,
         NestedScrollingChild, ScrollingView {
@@ -91,8 +94,8 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
     /**
      * Interface definition for a callback to be invoked when the scroll
      * X or Y positions of a view change.
-     * <p>
-     * <p>This version of the interface works on all versions of Android, back to API v4.</p>
+     * 
+     * This version of the interface works on all versions of Android, back to API v4.
      *
      * @see #setOnScrollChangeListener(OnScrollChangeListener)
      */
@@ -207,11 +210,6 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
 
     private boolean mFillViewportH;
     private boolean mFillViewportV;
-    private boolean mCanScrollH;
-    private boolean mCanScrollV;
-    private static final int[] SCROLLVIEW_STYLEABLE = new int[]{
-            fillViewportH, fillViewportV, canScrollH, canScrollV, R.attr.childLayoutCenter
-    };
     private final NestedScrollingParentHelper mParentHelper;
     private final NestedScrollingChildHelper mChildHelper;
 
@@ -227,16 +225,32 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
         this(context, attrs, 0);
     }
 
+    public static final int SCROLL_ORIENTATION_NONE = 0;
+    public static final int SCROLL_ORIENTATION_HORIZONTAL = 1;
+    public static final int SCROLL_ORIENTATION_VERTICAL = 2;
+    public static final int SCROLL_ORIENTATION_BOTH = 3;
+    private int mScrollOrientation;
+
+    public void setScrollOrientation(int scrollOrientation) {
+        this.mScrollOrientation = scrollOrientation;
+        requestLayout();
+    }
+
+    public int getScrollOrientation() {
+        return mScrollOrientation;
+    }
+
     public HVScrollView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initScrollView();
 
         final TypedArray a = context.obtainStyledAttributes(
-                attrs, SCROLLVIEW_STYLEABLE, defStyleAttr, 0);
+                attrs, R.styleable.HVScrollView, defStyleAttr, 0);
 
-        setChildLayoutCenter(a.getBoolean(R.styleable.HVScrollView_childLayoutCenter, false));
-        setFillViewportHV(a.getBoolean(R.styleable.HVScrollView_fillViewportH, false), a.getBoolean(R.styleable.HVScrollView_fillViewportV, false));
-        setCanScroll(a.getBoolean(R.styleable.HVScrollView_canScrollH, true), a.getBoolean(R.styleable.HVScrollView_canScrollV, true));
+        mChildLayoutCenter = a.getBoolean(R.styleable.HVScrollView_childLayoutCenter, false);
+        mFillViewportH = a.getBoolean(R.styleable.HVScrollView_fillViewportH, false);
+        mFillViewportV = a.getBoolean(R.styleable.HVScrollView_fillViewportV, false);
+        mScrollOrientation = a.getInt(R.styleable.HVScrollView_scrollOrientation, SCROLL_ORIENTATION_BOTH);
 
         a.recycle();
 
@@ -321,28 +335,11 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
     }
 
     public boolean canScrollHorizontally() {
-        return mCanScrollH;
-    }
-
-    public void setCanScrollHorizontally(boolean canScrollH) {
-        this.mCanScrollH = canScrollH;
-        requestLayout();
-    }
-
-    public void setCanScrollVertically(boolean canScrollV) {
-        this.mCanScrollV = canScrollV;
-        requestLayout();
-    }
-
-
-    public void setCanScroll(boolean canScrollH, boolean canScrollV) {
-        this.mCanScrollV = canScrollV;
-        this.mCanScrollH = canScrollH;
-        requestLayout();
+        return (mScrollOrientation & SCROLL_ORIENTATION_HORIZONTAL) == SCROLL_ORIENTATION_HORIZONTAL;
     }
 
     public boolean canScrollVertically() {
-        return mCanScrollV;
+        return (mScrollOrientation & SCROLL_ORIENTATION_VERTICAL) == SCROLL_ORIENTATION_VERTICAL;
     }
 
 
@@ -511,7 +508,7 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
     /**
      * Register a callback to be invoked when the scroll X or Y positions of
      * this view change.
-     * <p>This version of the method works on all versions of Android, back to API v4.</p>
+     * This version of the method works on all versions of Android, back to API v4.
      *
      * @param l The listener to notify when the scroll X or Y position changes.
      * @see View#getScrollX()
@@ -1258,9 +1255,9 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
     }
 
     /**
-     * <p>
+     * 
      * Finds the next focusable component that fits in the specified bounds.
-     * </p>
+     * 
      *
      * @param topFocus look for a candidate is the one at the top of the bounds
      *                 if topFocus is true, or at the bottom of the bounds if topFocus is
@@ -1408,11 +1405,11 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
     }
 
     /**
-     * <p>Handles scrolling in response to a "page up/down" shortcut press. This
+     * Handles scrolling in response to a "page up/down" shortcut press. This
      * method will scroll the view by one page up or down and give the focus
      * to the topmost/bottommost component in the new visible area. If no
      * component is a good candidate for focus, this scrollview reclaims the
-     * focus.</p>
+     * focus.
      *
      * @param direction the scroll direction: {@link View#FOCUS_UP}
      *                  to go one page up or
@@ -1466,11 +1463,11 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
     }
 
     /**
-     * <p>Handles scrolling in response to a "home/end" shortcut press. This
+     * Handles scrolling in response to a "home/end" shortcut press. This
      * method will scroll the view to the top or bottom and give the focus
      * to the topmost/bottommost component in the new visible area. If no
      * component is a good candidate for focus, this scrollview reclaims the
-     * focus.</p>
+     * focus.
      *
      * @param direction the scroll direction: {@link View#FOCUS_UP}
      *                  to go the top of the view or
@@ -1497,11 +1494,11 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
     }
 
     /**
-     * <p>Handles scrolling in response to a "home/end" shortcut press. This
+     * Handles scrolling in response to a "home/end" shortcut press. This
      * method will scroll the view to the top or bottom and give the focus
      * to the topmost/bottommost component in the new visible area. If no
      * component is a good candidate for focus, this scrollview reclaims the
-     * focus.</p>
+     * focus.
      *
      * @param direction the scroll direction: {@link View#FOCUS_UP}
      *                  to go the top of the view or
@@ -1554,10 +1551,10 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
     }
 
     /**
-     * <p>Scrolls the view to make the area defined by <code>top</code> and
+     * Scrolls the view to make the area defined by <code>top</code> and
      * <code>bottom</code> visible. This method attempts to give the focus
      * to a component visible in this area. If no component can be focused in
-     * the new visible area, the focus is reclaimed by this ScrollView.</p>
+     * the new visible area, the focus is reclaimed by this ScrollView.
      *
      * @param direction the scroll direction: {@link View#FOCUS_UP}
      *                  to go upward, {@link View#FOCUS_DOWN} to downward
@@ -1835,10 +1832,8 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
 
 
     /**
-     * <p>The scroll range of a scroll view is the overall height of all of its
-     * children.</p>
-     *
-     * @hide
+     * The scroll range of a scroll view is the overall height of all of its
+     * children.
      */
     @Override
     public int computeVerticalScrollRange() {
@@ -1864,7 +1859,7 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
     }
 
     /**
-     * @hide
+     * 
      */
     @Override
     public int computeVerticalScrollOffset() {
@@ -1872,7 +1867,7 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
     }
 
     /**
-     * @hide
+     * 
      */
     @Override
     public int computeVerticalScrollExtent() {
@@ -1880,7 +1875,7 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
     }
 
     /**
-     * @hide
+     * 
      */
     @Override
     public int computeHorizontalScrollRange() {
@@ -1905,7 +1900,7 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
     }
 
     /**
-     * @hide
+     * 
      */
     @Override
     public int computeHorizontalScrollOffset() {
@@ -1913,7 +1908,7 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
     }
 
     /**
-     * @hide
+     * 
      */
     @Override
     public int computeHorizontalScrollExtent() {
@@ -2298,7 +2293,7 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
     /**
      * When looking for focus in children of a scroll view, need to be a little
      * more careful not to give focus to something that is scrolled off screen.
-     * <p>
+     * 
      * This is more expensive than the default {@link ViewGroup}
      * implementation, otherwise this behavior might have been made the default.
      */
@@ -2450,8 +2445,8 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
 
     /**
      * {@inheritDoc}
-     * <p>
-     * <p>This version also clamps the scrolling to the bounds of our child.
+     * 
+     * This version also clamps the scrolling to the bounds of our child.
      */
     @Override
     public void scrollTo(int x, int y) {

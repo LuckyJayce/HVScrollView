@@ -4,69 +4,38 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#fff"
+        android:gravity="center"
+        android:text="下面黑色区域是HVScorllView" />
+
+    <!-- app:scrollOrientation="both" 可以滚动的方向，默认双向滚动,可以配置both,vertical,horizontal,none 四个值-->
+    <!--childLayoutCenter 内容是否居中显示，默认false右上角对齐-->
+    <!--fillViewportV  垂直内容宽度是否充满，默认false自适应-->
+    <!--fillViewportV  水平内容高度是否充满，默认false自适应-->
+
+    <!--android:scrollbars="horizontal|vertical" 显示滚动条-->
+    <!--android:fadingEdge="horizontal|vertical" 显示滚动条-->
+
     <com.shizhefei.view.hvscrollview.HVScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/guide_hvScrollView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#000"
-        android:padding="8dp"
-        android:scrollbars="horizontal|vertical"
+        android:layout_height="500dp"
         android:fadingEdge="horizontal|vertical"
-        app:canScrollH="true"
-        app:canScrollV="true"
+        android:scrollbars="horizontal|vertical"
         app:childLayoutCenter="false"
         app:fillViewportH="false"
-        app:fillViewportV="false">
-        <!--canScrollV 是否可以水平滚动,默认true 可以滚动-->
-        <!--canScrollV 是否可以垂直滚动,默认true 可以滚动-->
-        <!--childLayoutCenter 内容是否居中显示，默认false右上角对齐-->
-        <!--fillViewportV  垂直内容宽度是否充满，默认false自适应-->
-        <!--fillViewportV  水平内容高度是否充满，默认false自适应-->
+        app:fillViewportV="false"
+        app:scrollOrientation="both">
 
-        <!--android:scrollbars="horizontal|vertical" 显示滚动条-->
-        <!--android:fadingEdge="horizontal|vertical" 显示滚动条-->
-
-        <LinearLayout
-            android:id="@+id/guide_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#666"
-            android:orientation="vertical"
-            android:padding="8dp">
-
-            <TextView
-                android:layout_width="220dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="可以通过编辑输入框的文本，让布局变宽\n点击添加按钮让布局变长\n就会出现水平和垂直的滚动条"
-                android:textColor="#fff" />
-
-            <include layout="@layout/item" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp">
-
-                <Button
-                    android:id="@+id/guide_deleteButton"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:text="删除" />
-
-                <Button
-                    android:id="@+id/guide_addButton"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:text="添加" />
-            </LinearLayout>
-        </LinearLayout>
-
+        <TextView
+            android:layout_width="1000dp"
+            android:layout_height="1000dp"
+            android:layout_margin="8dp"
+            android:text="Hello World"
+            android:textColor="#fff" />
 
     </com.shizhefei.view.hvscrollview.HVScrollView>
 
@@ -104,26 +73,24 @@
             android:textOff="垂直宽度内容自适应"
             android:textOn="垂直宽度内容充满" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#666">
+        android:background="#666"
+        android:paddingBottom="8dp">
 
-        <ToggleButton
-            android:id="@+id/guide_canScrollH_toggleButton"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textOff="可以水平滚动"
-            android:textOn="禁止水平滚动" />
+            android:layout_gravity="center_vertical"
+            android:text="方向："
+            android:textColor="#fff" />
 
-        <ToggleButton
-            android:id="@+id/guide_canScrollV_toggleButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textOff="可以竖直滚动"
-            android:textOn="禁止竖直滚动" />
-
-
+        <com.shizhefei.view.indicator.FixedIndicatorView
+            android:id="@+id/guide_scrollOrientation_indicatorView"
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
     </LinearLayout>
 
 

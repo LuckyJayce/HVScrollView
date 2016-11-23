@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:canScrollH="false"
+    app:scrollOrientation="vertical"
+    app:fillViewportH="true"
     android:descendantFocusability="blocksDescendants">
 
     <LinearLayout
@@ -62,7 +63,7 @@
             android:id="@+id/main_hvScrollView"
             android:layout_width="match_parent"
             android:layout_height="260dp"
-            app:canScrollH="false"
+            app:scrollOrientation="vertical"
             android:background="#000"
             android:fadingEdge="horizontal|vertical"
             android:padding="8dp"

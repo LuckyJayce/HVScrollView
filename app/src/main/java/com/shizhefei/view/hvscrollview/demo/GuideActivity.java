@@ -1,14 +1,20 @@
 package com.shizhefei.view.hvscrollview.demo;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.shizhefei.view.hvscrollview.HVScrollView;
+import com.shizhefei.view.indicator.Indicator;
+import com.shizhefei.view.indicator.slidebar.ColorBar;
+import com.shizhefei.view.indicator.transition.OnTransitionTextListener;
 
 
 public class GuideActivity extends FragmentActivity {
@@ -16,12 +22,11 @@ public class GuideActivity extends FragmentActivity {
     private View addButton;
     private LinearLayout layout;
     private View deleteButton;
-    private ToggleButton canScrollHToggleButton;
-    private ToggleButton canScrollVToggleButton;
     private ToggleButton fillViewportHToggleButton;
     private ToggleButton fillViewportVToggleButton;
     private ToggleButton childLayoutCanterToggleButton;
     private HVScrollView hvScrollView;
+    private Indicator scrollOrientationIndicatorView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,25 +35,24 @@ public class GuideActivity extends FragmentActivity {
         layout = (LinearLayout) findViewById(R.id.guide_layout);
         addButton = findViewById(R.id.guide_addButton);
         deleteButton = findViewById(R.id.guide_deleteButton);
-        canScrollHToggleButton = (ToggleButton) findViewById(R.id.guide_canScrollH_toggleButton);
-        canScrollVToggleButton = (ToggleButton) findViewById(R.id.guide_canScrollV_toggleButton);
         fillViewportHToggleButton = (ToggleButton) findViewById(R.id.guide_fillViewportH_toggleButton);
         fillViewportVToggleButton = (ToggleButton) findViewById(R.id.guide_fillViewportV_toggleButton);
         childLayoutCanterToggleButton = (ToggleButton) findViewById(R.id.guide_childLayoutCanter_toggleButton);
         hvScrollView = (HVScrollView) findViewById(R.id.guide_hvScrollView);
+        scrollOrientationIndicatorView = (Indicator) findViewById(R.id.guide_scrollOrientation_indicatorView);
 
         addButton.setOnClickListener(onClickListener);
         deleteButton.setOnClickListener(onClickListener);
 
-        canScrollHToggleButton.setOnCheckedChangeListener(onCheckedChangeListener);
-        canScrollVToggleButton.setOnCheckedChangeListener(onCheckedChangeListener);
         fillViewportHToggleButton.setOnCheckedChangeListener(onCheckedChangeListener);
         fillViewportVToggleButton.setOnCheckedChangeListener(onCheckedChangeListener);
         childLayoutCanterToggleButton.setOnCheckedChangeListener(onCheckedChangeListener);
 
-//        setContentView(R.layout.layout2);
-
-//        NestedScrollView
+        scrollOrientationIndicatorView.setAdapter(indicatorAdapter);
+        scrollOrientationIndicatorView.setScrollBar(new ColorBar(this, Color.WHITE, 8));
+        scrollOrientationIndicatorView.setOnTransitionListener(new OnTransitionTextListener().setColor(Color.WHITE, Color.parseColor("#cccccc")));
+        scrollOrientationIndicatorView.setCurrentItem(3);
+        scrollOrientationIndicatorView.setOnItemSelectListener(onItemSelectListener);
     }
 
     private int index = 1;
@@ -70,16 +74,9 @@ public class GuideActivity extends FragmentActivity {
     };
 
     private ToggleButton.OnCheckedChangeListener onCheckedChangeListener = new ToggleButton.OnCheckedChangeListener() {
-
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            if (compoundButton == canScrollHToggleButton) {//是否可以水平滚动，默认可以滚动
-                hvScrollView.setCanScrollHorizontally(!compoundButton.isChecked());
-
-            } else if (compoundButton == canScrollVToggleButton) {//是否可以垂直滚动，默认可以滚动
-                hvScrollView.setCanScrollVertically(!compoundButton.isChecked());
-
-            } else if (compoundButton == fillViewportHToggleButton) {  //水平内容宽度是否充满，默认false自适应
+            if (compoundButton == fillViewportHToggleButton) {  //水平内容宽度是否充满，默认false自适应
                 hvScrollView.setFillViewportH(compoundButton.isChecked());
 
             } else if (compoundButton == fillViewportVToggleButton) {//垂直内容高度是否充满，默认false自适应
@@ -90,4 +87,37 @@ public class GuideActivity extends FragmentActivity {
             }
         }
     };
+
+    private Indicator.IndicatorAdapter indicatorAdapter = new Indicator.IndicatorAdapter() {
+        private String[] titles = {"不能滚动", "只能水平滚动", "只能垂直滚动", "双向滚动"};
+
+        @Override
+        public int getCount() {
+            return titles.length;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.item_toptab, parent, false);
+            }
+            TextView textView = (TextView) convertView;
+            textView.setText(titles[position]);
+            return convertView;
+        }
+    };
+
+    private Indicator.OnItemSelectedListener onItemSelectListener = new Indicator.OnItemSelectedListener() {
+
+        @Override
+        public void onItemSelected(View selectItemView, int select, int preSelect) {
+//          public static final int SCROLL_ORIENTATION_NONE = 0;
+//          public static final int SCROLL_ORIENTATION_HORIZONTAL = 1;
+//          public static final int SCROLL_ORIENTATION_VERTICAL = 2;
+//          public static final int SCROLL_ORIENTATION_BOTH = 3;
+            hvScrollView.setScrollOrientation(select);
+        }
+    };
+
+
 }

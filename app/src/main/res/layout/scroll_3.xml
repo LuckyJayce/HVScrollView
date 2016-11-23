@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:background="#666"
         android:padding="8dp"
-        app:canScrollV="false">
+        app:scrollOrientation="horizontal">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="8dp"
         android:background="#666"
-        app:canScrollH="false">
+        app:scrollOrientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,7 +65,7 @@
                 android:layout_height="200dp"
                 android:background="#666"
                 android:padding="8dp"
-                app:canScrollH="false">
+                app:scrollOrientation="vertical">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
