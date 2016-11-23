@@ -7,6 +7,9 @@ HVScrollView
     compile 'com.shizhefei:HVScrollView:1.0.0'  
     compile 'com.android.support:support-v4:23.4.0'  
 # 效果图 # 
+
+Download sample [Apk](https://github.com/LuckyJayce/HVScrollView/blob/master/raw/HVScrollView.apk?raw=true)   
+
 ![image](https://github.com/LuckyJayce/HVScrollView/blob/master/raw/HVScrollView.gif)
 
 # 使用方法 # 
